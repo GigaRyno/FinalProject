@@ -1,4 +1,7 @@
 # FinalProject
 Final Project for CSI-230
 
-1. Made the main frame for the project 
+- Made the main frame for the project 
+- having a hard time finding a good graph library
+
+
