@@ -1,3 +1,5 @@
+#include "pbPlots.hpp" //used for making graphs
+#include "supportLib.hpp" //used for making graphs
 #include <graph_utils.h>
 #include <unistd.h> //used for getopt
 #include <iostream>
@@ -7,12 +9,17 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    RGBABitmapImageReference *imageRef = CreateRGBABitmapImageReference();
+
     int option;
     bool rpmFlag = false;
     bool boostFlag = false;
     bool optError = true;
     string fileName;
     string filler = "This is a Filler String";
+
+    vector<double> x{};
+    vector<double> y{};
 
     //My goal was to have select the thing u wanted to view when passing in the file
     while((option = getopt(argc, argv, "o:r:b:")) != EOF)
@@ -54,7 +61,7 @@ int main(int argc, char *argv[])
             if(inFile)
             {
                 //cout << "In File" << endl;
-                int linesParsed = processCSV(inFile, fileName + ".txt", filler);
+                int linesParsed = processCSV(inFile, fileName + ".txt");
                 inFile.close();
                 if(linesParsed)
                 {
@@ -88,7 +95,7 @@ int main(int argc, char *argv[])
             if(inFile)
             {
                 //cout << "In File" << endl;
-                int linesParsed = processCSV(inFile, fileName + ".txt", filler);
+                int linesParsed = processCSV(inFile, fileName + ".txt");
                 inFile.close();
                 if(linesParsed)
                 {
@@ -118,9 +125,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
         //cout << "ERRRRORRRRR" << endl;
     }
-
-    //cout << "fileName: " << fileName << endl;
-    //cout << "optError: " << optError << endl;
 
     return optError;
 }

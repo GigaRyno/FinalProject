@@ -9,10 +9,11 @@
 #include <graph_utils.h>
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int processCSV(std::ifstream &inFile, std::string FileName, std::string Opt)
+int processCSV(std::ifstream &inFile, std::string FileName)
 {
     //All the strings below are different things that are data logged while datalogging a car.  
     // it got to long for one line because I have 32 different things that it records. so for reading it I made it 2 lines fo strings
@@ -25,8 +26,6 @@ int processCSV(std::ifstream &inFile, std::string FileName, std::string Opt)
    if (inFile)
    {
       ofstream CSVFile(FileName);
-
-      cout << Opt << endl;
 
       getline(inFile, strLine);
       while (getline(inFile, strLine))

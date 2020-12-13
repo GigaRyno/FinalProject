@@ -17,6 +17,6 @@
  * @param FileName the name of the file that you want to produce
  * @return int returns the number of records processed
  */
-int processCSV(std::ifstream &inFile, std::string FileName, std::string Opt);
+int processCSV(std::ifstream &inFile, std::string FileName);
 
 #endif
