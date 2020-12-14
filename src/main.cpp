@@ -1,3 +1,10 @@
+/**
+ * @file main.cpp
+ * @author Ryan LaVigne
+ * @brief Read a csv file and convert data to a graph
+ * @date 12-11-2020
+ */
+
 #include "pbPlots.hpp" //used for making graphs
 #include "supportLib.hpp" //used for making graphs
 #include <graph_utils.h>
@@ -11,7 +18,7 @@ using namespace std;
 vector<double> x{}; //Time
 vector<double> y{}; //What ever you choose
 
-double processCSV(std::ifstream &inFile, std::string Opt); //Definition
+void processCSV(std::ifstream &inFile, std::string Opt); //Definition
 
 int main(int argc, char *argv[])
 {
@@ -27,8 +34,8 @@ int main(int argc, char *argv[])
     bool oilFlag = false;
     bool tranFlag = false;
     bool fuelFlag = false;
-    bool damFlag = false;
-    bool feedbackFlag = false;
+    bool manifoldFlag = false;
+    bool tqFlag = false;
     bool airFlag = false;
     bool coolFlag = false;
     bool ignitionFlag = false;
@@ -37,7 +44,7 @@ int main(int argc, char *argv[])
     string fileName;
 
     //My goal was to have select the thing u wanted to view when passing in the file
-    while((option = getopt(argc, argv, "o:r:b:t:f:d:k:a:c:i:")) != EOF)
+    while((option = getopt(argc, argv, "o:r:b:t:f:m:q:a:c:i:")) != EOF)
     {
         //to simplifiy you can only choose 1 thing at a time.
         //example: the graph would be what ever you choose over time for readability
@@ -68,15 +75,15 @@ int main(int argc, char *argv[])
                 fileName = optarg;
                 menuOption = "fuel";
                 break;
-            case 'd'://dam
-                damFlag = true; 
+            case 'm'://intake manifold temp
+                manifoldFlag = true; 
                 fileName = optarg;
-                menuOption = "dam";
+                menuOption = "man";
                 break;
-            case 'k'://feedback knock
-                feedbackFlag = true; 
+            case 'q'://torque
+                tqFlag = true; 
                 fileName = optarg;
-                menuOption = "knock";
+                menuOption = "tq";
                 break;
             case 'a'://AF Sens 1
                 airFlag = true;
@@ -99,7 +106,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    if(rpmFlag || boostFlag || oilFlag || tranFlag || fuelFlag || damFlag || feedbackFlag || airFlag || coolFlag || ignitionFlag) {
+    if(rpmFlag || boostFlag || oilFlag || tranFlag || fuelFlag || manifoldFlag || tqFlag || airFlag || coolFlag || ignitionFlag) {
         if(fileName.empty())
         {
             cout << "Error: Filename not set!" << endl;
@@ -115,7 +122,8 @@ int main(int argc, char *argv[])
                 DrawScatterPlot(imageRef, 600, 400, &x, &y);
                 vector<double> *pngData = ConvertToPNG(imageRef->image);
                 WriteToFile(pngData, "graph.png");
-                DeleteImage(imageRef->image);             
+                DeleteImage(imageRef->image);       
+                cout << "Graph Made" << endl;      
             }
             else
             {
@@ -140,15 +148,13 @@ int main(int argc, char *argv[])
 
 
 //I had problems getting the data after reading the file when in another file so it is in here now and works fine.
-double processCSV(std::ifstream &inFile, std::string Opt)
+void processCSV(std::ifstream &inFile, std::string Opt)
 {
     //All the strings below are different things that are data logged while datalogging a car.  
     // it got to long for one line because I have 32 different things that it records. so for reading it I made it 2 lines fo strings
    string time, calcLoad, clFuelTarget, commFuelFinal, transTemp, dam, feedBackKnock, fineKnockLearn, fuelPres, fuelPressureTarget, rpm, throttlePos, wasteGateDuty, strLine;
    string gear, intakeManifoldTemp, mafCorr, boost, oilTemp, reqTQ, tdBoostError, tgvMapRatio, afCorrection, afLearning, afSen, pedalPos, baroPressure, coolantTemp, ignitionTiming, injDutyCycle, intakeTemp, mafVolt;
    stringstream s_stream;
-
-   int linesParsed = 0;
 
    if (inFile)
    {
@@ -224,19 +230,19 @@ double processCSV(std::ifstream &inFile, std::string Opt)
              x.push_back(times);
              y.push_back(fuelPre);
          } 
-         else if(Opt == "dam")
+         else if(Opt == "man")
          {
              double times = stod(time);
-             double Dyn = stod(dam);
+             double man = stod(intakeManifoldTemp);
              x.push_back(times);
-             y.push_back(Dyn);
+             y.push_back(man);
          } 
-         else if(Opt == "knock")
+         else if(Opt == "tq")
          {
              double times = stod(time);
-             double feedKnock = stod(feedBackKnock);
+             double torque = stod(reqTQ);
              x.push_back(times);
-             y.push_back(feedKnock);
+             y.push_back(torque);
          } 
          else if(Opt == "air")
          {
@@ -263,8 +269,6 @@ double processCSV(std::ifstream &inFile, std::string Opt)
          {
              cout << "No Selection" << endl;
          }
-        linesParsed++;
       }
    }  
-   return linesParsed; 
 }

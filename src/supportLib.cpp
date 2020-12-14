@@ -1,3 +1,9 @@
+/**
+ * @file supportLib.hpp
+ * @brief supports graph
+ * @credit written by: https://github.com/InductiveComputerScience/pbPlots/tree/v0.1.8.0
+ */
+
 #include "supportLib.hpp"
 
 unsigned char *DoubleArrayToByteArray(vector<double> *data){
