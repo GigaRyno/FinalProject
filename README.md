@@ -11,4 +11,5 @@ Final Project for CSI-230
 - Added pbPlots which is a c++ library that makes making graphs easy
 - I had issues havign processCSV in the other graph_utils.cpp so I brought it back over to the main.cpp file and also put the PrintVector function into the graph_utils.
 - Updated all nessecery files
-- 
+- Figured out a way to condense my code by half
+- Program makes a graph like supposed to
