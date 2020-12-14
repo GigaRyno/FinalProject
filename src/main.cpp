@@ -18,28 +18,32 @@ int main(int argc, char *argv[])
     RGBABitmapImageReference *imageRef = CreateRGBABitmapImageReference();
 
     int option;
+
+    bool optError = true;
+
+    //Instead of doing the full 32 I chose to do the most important 10
     bool rpmFlag = false;
     bool boostFlag = false;
-    bool optError = true;
     bool oilFlag = false;
     bool tranFlag = false;
+    bool fuelFlag = false;
+    bool damFlag = false;
+    bool feedbackFlag = false;
+    bool airFlag = false;
+    bool coolFlag = false;
+    bool ignitionFlag = false;
 
     string menuOption;
-
-
     string fileName;
-    string filler = "This is a Filler String";
-
-    double RPMS;
 
     //My goal was to have select the thing u wanted to view when passing in the file
-    while((option = getopt(argc, argv, "o:r:b:t:")) != EOF)
+    while((option = getopt(argc, argv, "o:r:b:t:f:d:k:a:c:i:")) != EOF)
     {
         //to simplifiy you can only choose 1 thing at a time.
         //example: the graph would be what ever you choose over time for readability
         switch(option)
         {
-            case 'o'://oil Temp
+            case 'o'://Oil Temp
                 oilFlag = true;
                 fileName = optarg;
                 menuOption = "oil";
@@ -54,10 +58,40 @@ int main(int argc, char *argv[])
                 fileName = optarg;
                 menuOption = "boost";
                 break;
-            case 't':
+            case 't'://Trans Temp
                 tranFlag = true;
                 fileName = optarg;
                 menuOption = "trans";
+                break;
+            case 'f'://Fuel Pressure
+                fuelFlag = true;
+                fileName = optarg;
+                menuOption = "fuel";
+                break;
+            case 'd'://dam
+                damFlag = true; 
+                fileName = optarg;
+                menuOption = "dam";
+                break;
+            case 'k'://feedback knock
+                feedbackFlag = true; 
+                fileName = optarg;
+                menuOption = "knock";
+                break;
+            case 'a'://AF Sens 1
+                airFlag = true;
+                fileName = optarg;
+                menuOption = "air";
+                break;
+            case 'c'://Coolant Temp
+                coolFlag = true; 
+                fileName = optarg;
+                menuOption = "cool";
+                break;
+            case 'i': //Ignition Timing
+                ignitionFlag = true;
+                fileName = optarg;
+                menuOption = "ign";
                 break;
             default:
                 optError = true;
@@ -65,7 +99,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    if(rpmFlag || boostFlag || tranFlag || oilFlag) {
+    if(rpmFlag || boostFlag || oilFlag || tranFlag || fuelFlag || damFlag || feedbackFlag || airFlag || coolFlag || ignitionFlag) {
         if(fileName.empty())
         {
             cout << "Error: Filename not set!" << endl;
@@ -182,6 +216,48 @@ double processCSV(std::ifstream &inFile, std::string Opt)
              double tempOil = stod(oilTemp);
              x.push_back(times);
              y.push_back(tempOil);
+         } 
+         else if(Opt == "fuel")
+         {
+             double times = stod(time);
+             double fuelPre = stod(fuelPres);
+             x.push_back(times);
+             y.push_back(fuelPre);
+         } 
+         else if(Opt == "dam")
+         {
+             double times = stod(time);
+             double Dyn = stod(dam);
+             x.push_back(times);
+             y.push_back(Dyn);
+         } 
+         else if(Opt == "knock")
+         {
+             double times = stod(time);
+             double feedKnock = stod(feedBackKnock);
+             x.push_back(times);
+             y.push_back(feedKnock);
+         } 
+         else if(Opt == "air")
+         {
+             double times = stod(time);
+             double af = stod(afSen);
+             x.push_back(times);
+             y.push_back(af);
+         } 
+         else if(Opt == "cool")
+         {
+             double times = stod(time);
+             double cool = stod(coolantTemp);
+             x.push_back(times);
+             y.push_back(cool);
+         } 
+         else if(Opt == "ign")
+         {
+             double times = stod(time);
+             double ign = stod(ignitionTiming);
+             x.push_back(times);
+             y.push_back(ign);
          } 
          else
          {
