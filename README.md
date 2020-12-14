@@ -21,6 +21,9 @@ Key: there is only 2 arguments that are needed to be passed in. The first is usi
 
 Note: The X-axis is always going to stay the same because for easy reability I made it so that ever the option they choose is always over time. 
 
+# Libraries Used
+
+- I used pbPlot as a library to make the graphs
 
 # During Project Process
 Final Project for CSI-230
