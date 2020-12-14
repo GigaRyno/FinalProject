@@ -13,10 +13,8 @@
 #include <vector>
 
 /**
- * @brief process data from a datalog from a CSV file
- * @param inFile ifstream to an opened and validated csv file
- * @param FileName the name of the file that you want to produce
- * @return int returns the number of records processed
+ * @brief prints what is inside vector
+ * @return returns a console output of the vector
  */
 
 void printVector(std::vector <double> const &a);

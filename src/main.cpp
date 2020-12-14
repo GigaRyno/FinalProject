@@ -123,7 +123,9 @@ int main(int argc, char *argv[])
                 vector<double> *pngData = ConvertToPNG(imageRef->image);
                 WriteToFile(pngData, "graph.png");
                 DeleteImage(imageRef->image);       
-                cout << "Graph Made" << endl;      
+                cout << "Graph Made" << endl;     
+                //printVector(x); //Shows vectors to figure out what is wrong
+                //printVector(y); //Shows vectors to figure out what is wrong 
             }
             else
             {
