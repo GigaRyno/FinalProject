@@ -15,4 +15,4 @@ Final Project for CSI-230
 - Program makes a graph like supposed to
 - Decided that 32 options was too much so I only implememted 10 of the most important ones to have\
 - Works flawlessly
-- Cleaning Code up and checking over requirements\
+- Cleaning Code up and checking over requirements
