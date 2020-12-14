@@ -16,3 +16,4 @@ Final Project for CSI-230
 - Decided that 32 options was too much so I only implememted 10 of the most important ones to have\
 - Works flawlessly
 - Cleaning Code up and checking over requirements
+- I watched the video back like 6 times and tried for about an hour to get the shared object lib to work but it has failed so instead of wasting time I moved on and will take the points on it. I kept getting a error. here is a screen shot
