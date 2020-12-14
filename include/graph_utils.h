@@ -1,7 +1,7 @@
 /**
  * @file graph_utils.h
  * @author Ryan LaVigne
- * @brief Final Project
+ * @brief Supporting Functions
  * @date 12-11-2020
  * @credit Lab10.2 modified to work
  */
@@ -10,6 +10,7 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
 
 /**
  * @brief process data from a datalog from a CSV file
@@ -17,6 +18,7 @@
  * @param FileName the name of the file that you want to produce
  * @return int returns the number of records processed
  */
-int processCSV(std::ifstream &inFile, std::string FileName);
+
+void printVector(std::vector <double> const &a);
 
 #endif
