@@ -1,4 +1,26 @@
-# FinalProject
+# How To Use
+Car Data Visualizer
+
+Breif: This is a program that takes input of a CSV file from the COBB Accessport which was a datalog of me driving my car. it will then take this file parse through it and then take that very hard to read data and put it in a graph so it is much easier to see what is happening. 
+
+Key: there is only 2 arguments that are needed to be passed in. The first is using (dash) you can chose from the 10 following options
+- o = Oil Tempature
+- r = RPMs
+- b = Boost
+- t = Transmission Tempature
+- f = Fuel Pressure
+- m = Intake Manifold Temp
+- q = Req Torque
+- a = Air/Fuel Ratio
+- c = Coolant Tempatures
+- i = Ignition Timing
+
+- If not option is selected it will throw error saying no arguements and the exit.
+
+Note: The X-axis is always going to stay the same because for easy reability I made it so that ever the option they choose is always over time. 
+
+
+# During Project Process
 Final Project for CSI-230
 
 - Made the main frame for the project 
