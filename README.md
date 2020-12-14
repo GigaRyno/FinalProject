@@ -3,6 +3,8 @@ Car Data Visualizer
 
 Breif: This is a program that takes input of a CSV file from the COBB Accessport which was a datalog of me driving my car. it will then take this file parse through it and then take that very hard to read data and put it in a graph so it is much easier to see what is happening. 
 
+Example Command: main -o test.csv
+
 Key: there is only 2 arguments that are needed to be passed in. The first is using (dash) you can chose from the 10 following options
 - o = Oil Tempature
 - r = RPMs
